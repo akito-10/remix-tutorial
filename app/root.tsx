@@ -10,7 +10,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import appStylesHref from "./app.css";
-import { LinksFunction, json } from "@remix-run/node";
+import { LinksFunction, json, redirect } from "@remix-run/node";
 import { createEmptyContact, getContacts } from "./data";
 
 export const links: LinksFunction = () => [
@@ -24,7 +24,7 @@ export const loader = async () => {
 
 export const action = async () => {
   const contact = await createEmptyContact();
-  return json({ contact });
+  return redirect(`/contacts/${contact.id}/edit`);
 };
 
 export default function App() {
